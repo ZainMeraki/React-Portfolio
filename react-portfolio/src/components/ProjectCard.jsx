@@ -1,25 +1,31 @@
 import React from 'react';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink, Eye } from 'lucide-react';
 
-const ProjectCard = ({ name, screenshot, githubRepo, techUsed, writeUp, isDark }) => {
-  // Function to convert backticks to <code> tags
+const ProjectCard = ({ name, screenshot, githubRepo, techUsed, writeUp, isDark, onViewDetails }) => {
+  // Format text with code highlighting
   const formatText = (text) => {
     if (!text) return '';
-    
-    // Replace backticks with <code> tags
     return text.replace(/`([^`]+)`/g, '<code class="code-highlight">$1</code>');
   };
 
   return (
     <div className={`${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border`}>
       {/* Screenshot */}
-      <div className="relative h-48 sm:h-56 md:h-48 lg:h-52 bg-gray-900 overflow-hidden group">
+      <div className="relative h-48 sm:h-56 md:h-48 lg:h-52 bg-gray-900 overflow-hidden group cursor-pointer" onClick={onViewDetails}>
         <img 
           src={screenshot} 
           alt={`${name} screenshot`}
           className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-transparent to-transparent opacity-70"></div>
+        
+        {/* Hover Overlay with "View Details" */}
+        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <div className="text-center">
+            <Eye className="text-white mx-auto mb-2" size={40} />
+            <p className="text-white font-semibold text-lg">View Details</p>
+          </div>
+        </div>
         
         {/* Floating Tech Count Badge */}
         <div className="absolute top-4 right-4 bg-black bg-opacity-70 backdrop-blur-sm px-3 py-1 rounded-full">
@@ -46,7 +52,7 @@ const ProjectCard = ({ name, screenshot, githubRepo, techUsed, writeUp, isDark }
           ))}
         </div>
 
-        {/* Write-up Section with inline styles for code blocks */}
+        {/* Inline styles for code highlighting */}
         <style>{`
           .code-highlight {
             background-color: ${isDark ? 'rgba(59, 130, 246, 0.2)' : 'rgba(59, 130, 246, 0.15)'};
@@ -60,57 +66,41 @@ const ProjectCard = ({ name, screenshot, githubRepo, techUsed, writeUp, isDark }
           }
         `}</style>
 
-        <div className={`space-y-3 text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+        {/* Write-up Section - Truncated Preview */}
+        <div className={`space-y-3 text-sm ${isDark ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
           <div>
             <p className="font-semibold text-blue-500 mb-1">What it does:</p>
             <p 
-              className="leading-relaxed"
+              className="leading-relaxed line-clamp-3"
               dangerouslySetInnerHTML={{ __html: formatText(writeUp.whatItDoes) }}
-            />
-          </div>
-
-          <div>
-            <p className="font-semibold text-purple-500 mb-1">What I learned:</p>
-            <p 
-              className="leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: formatText(writeUp.whatILearned) }}
-            />
-          </div>
-
-          {writeUp.myRole && (
-            <div>
-              <p className="font-semibold text-green-500 mb-1">My role:</p>
-              <p 
-                className="leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: formatText(writeUp.myRole) }}
-              />
-            </div>
-          )}
-
-          <div>
-            <p className="font-semibold text-orange-500 mb-1">Challenges solved:</p>
-            <p 
-              className="leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: formatText(writeUp.challengesSolved) }}
             />
           </div>
         </div>
 
-        {/* GitHub Link Button */}
-        <a 
-          href={githubRepo}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`mt-6 w-full inline-flex items-center justify-center gap-2 px-4 py-3 ${
-            isDark 
-              ? 'bg-linear-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500' 
-              : 'bg-linear-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600'
-          } text-white font-medium rounded-lg transition-all duration-200 shadow-md hover:shadow-lg`}
-        >
-          <Github size={20} />
-          View on GitHub
-          <ExternalLink size={16} />
-        </a>
+        {/* Action Buttons */}
+        <div className="flex gap-2">
+          <button
+            onClick={onViewDetails}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 bg-linear-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-medium rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+          >
+            <Eye size={18} />
+            View Details
+          </button>
+          <a 
+            href={githubRepo}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className={`px-4 py-3 ${
+              isDark 
+                ? 'bg-gray-700 hover:bg-gray-600' 
+                : 'bg-gray-200 hover:bg-gray-300'
+            } ${isDark ? 'text-white' : 'text-gray-900'} font-medium rounded-lg transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center`}
+            title="View on GitHub"
+          >
+            <Github size={20} />
+          </a>
+        </div>
       </div>
     </div>
   );

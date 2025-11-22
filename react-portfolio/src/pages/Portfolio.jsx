@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Search, X, Filter, Eye, EyeOff } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
+import ProjectPopup from '../components/ProjectPopup';
 
 // Import your images
 import num2Word from '../assets/Num2Word.png';
@@ -20,6 +21,10 @@ const Portfolio = ({ isDark }) => {
   const [selectedTechs, setSelectedTechs] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
   
+  // ⭐ NEW: Popup state management
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   // ⭐ STATE FOR PREVIEW CHALLENGE
   const [showProjects, setShowProjects] = useState(false);
 
@@ -195,6 +200,18 @@ const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCas
     setSearchQuery('');
   };
 
+  // ⭐ NEW: Function to open popup
+  const handleViewDetails = (project) => {
+    setSelectedProject(project);
+    setIsPopupOpen(true);
+  };
+
+  // ⭐ NEW: Function to close popup
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+    setTimeout(() => setSelectedProject(null), 300); // Clear after animation
+  };
+
   return (
     <div className={`min-h-screen ${isDark ? 'bg-linear-to-br from-gray-900 via-gray-800 to-gray-900' : 'bg-linear-to-br from-gray-50 via-white to-gray-100'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -345,6 +362,7 @@ const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCas
                     techUsed={project.techUsed}
                     writeUp={project.writeUp}
                     isDark={isDark}
+                    onViewDetails={() => handleViewDetails(project)} // ⭐ Pass handler
                   />
                 ))}
               </div>
@@ -375,6 +393,14 @@ const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCas
           </div>
         )}
       </div>
+      {/* ⭐ NEW: Render Popup */}
+      {isPopupOpen && (
+        <ProjectPopup 
+          project={selectedProject}
+          isDark={isDark}
+          onClose={handleClosePopup}
+        />
+      )}
     </div>
   );
 };

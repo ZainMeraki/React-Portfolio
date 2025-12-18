@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, X, Filter, Eye, EyeOff } from 'lucide-react';
+import { Search, X, Filter } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
 import ProjectPopup from '../components/ProjectPopup';
 
@@ -15,6 +15,7 @@ import bookTracker from '../assets/Book-Tracker.png';
 import numberGame from '../assets/Number-Game.png';
 import gameZone from '../assets/Bootstrap.png';
 import svgAnimation from '../assets/SVGAnimBasics.png';
+import cityGuesser from '../assets/CityGuesser.png';
 
 const Portfolio = ({ isDark }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -26,7 +27,7 @@ const Portfolio = ({ isDark }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   // ⭐ STATE FOR PREVIEW CHALLENGE
-  const [showProjects, setShowProjects] = useState(false);
+  
 
   const projects = [
     {
@@ -42,15 +43,15 @@ const Portfolio = ({ isDark }) => {
       }
     },
     {
-      name: "Code Diary",
-      screenshot: codeDiary,
-      githubRepo: "https://github.com/ZainMeraki/Code-Diary",
-      techUsed: ["HTML", "CSS", "Javascript"],
+      name: "City Guesser",
+      screenshot: cityGuesser,
+      githubRepo: "https://github.com/ZainMeraki/React-API",
+      techUsed: ["HTML", "CSS", "Javascript", "React JS", "GeoDB API"],
       writeUp: {
-        whatItDoes: "A static, single-page application (SPA) acting as a technical reference guide for core web development concepts (HTML, CSS, JavaScript, and Git). It uses a fixed sidebar for navigation and dynamically switches between content sections (CSS, JS, Git) without full page reloads. The application also includes a Dark/Light Mode toggle for improved accessibility and user preference retention.",
-        whatILearned: "I reinforced my understanding of CSS structure, including the four methods of including CSS (Inline, Internal, External, and JavaScript). I consolidated the difference between the ID and Class attributes for targeted vs. reusable styling. I also detailed key responsive design principles, such as utilizing relative units (percentages) and min/max constraints to ensure fluid layout across various viewports. Finally, I documented the essential three-step Git workflow (add, commit, push) for version control.",
-        myRole: "Solo project, responsible for content organization, structuring the HTML for content modularity (using sections and lists), and curating the comprehensive technical notes for foundational web technologies.",
-        challengesSolved: "Successfully organized complex, multi-topic notes into a single, highly readable format using semantic HTML5 elements (sections, ordered/unordered lists, code tables). The design clearly distinguishes between unique element identification (ID) and reusable styling groups (Class). The detailed documentation on Git provides clear analogies and a simplified workflow for version control beginners."
+        whatItDoes: "An interactive geography-based quiz game built with ReactJS where players identify major global cities based on population statistics. The application features a robust authentication system (Login/Registration) that persists user data via LocalStorage. Gameplay includes a dynamic scoring engine that awards 10 points for standard guesses or 5 points when using the 'Hint' feature, alongside real-time streak tracking and automated feedback transitions. It integrates with the GeoDB Cities API to fetch live data for cities with populations exceeding 500,000.",
+        whatILearned: "I advanced my proficiency in React Hooks, specifically using 'useEffect' for asynchronous API orchestration and 'useState' for managing complex game states. I learned how to implement client-side authentication logic and session persistence without a dedicated backend by leveraging browser storage. Additionally, I practiced complex form validation techniques, including the use of Regular Expressions (Regex) to enforce multi-factor password requirements (uppercase, numbers, and special characters) during the registration process.",
+        myRole: "Solo Developer responsible for the full-stack frontend architecture. My work included designing the UI components with Tailwind CSS, integrating the RapidAPI service, managing the application's 'routing' logic via conditional rendering, and developing the algorithmic 'shuffle' logic to generate randomized multiple-choice options from API responses.",
+        challengesSolved: "Successfully managed the synchronization of asynchronous API data with the UI, ensuring loading states were handled gracefully to prevent empty renders. I solved the challenge of game flow by implementing a timed feedback system—allowing users to see their results before the component automatically resets for the next round. I also enhanced the user experience by building a real-time password requirement checklist that provides immediate visual confirmation (green/gray icons) as the user types."
       }
     },
     {
@@ -63,6 +64,18 @@ const Portfolio = ({ isDark }) => {
         whatILearned: "I gained expertise in Sass pre-processing, enforcing modularity and consistency using a BEM-inspired structure with partials and mixins. I mastered Flexbox and precise media queries to ensure the site was fully responsive down to 320px. I also integrated complex design features, including custom SVG path curves, sophisticated CSS pseudo-elements for typography, and comprehensive hover/focus states across all interactive elements to achieve high design fidelity.",
         myRole: "Solo developer, responsible for full recreation of the provided design under a 12-hour deadline. This included HTML semantics, responsive design implementation, Sass architecture setup, and ensuring cross-browser compatibility, focusing on meeting all assignment criteria (valid code, normalize.css, favicon, form validation, and responsiveness).",
         challengesSolved: "Successfully managed high design fidelity and complexity under a tight deadline. Key solutions included: leveraging Sass mixins for a rapid, scalable, and modular codebase; precisely recreating two-part backgrounds using CSS linear gradients; and accurately positioning complex SVG path curves (using negative margins and z-index) to visually connect steps in the Process section."
+      }
+    },
+        {
+      name: "Code Diary",
+      screenshot: codeDiary,
+      githubRepo: "https://github.com/ZainMeraki/Code-Diary",
+      techUsed: ["HTML", "CSS", "Javascript"],
+      writeUp: {
+        whatItDoes: "A static, single-page application (SPA) acting as a technical reference guide for core web development concepts (HTML, CSS, JavaScript, and Git). It uses a fixed sidebar for navigation and dynamically switches between content sections (CSS, JS, Git) without full page reloads. The application also includes a Dark/Light Mode toggle for improved accessibility and user preference retention.",
+        whatILearned: "I reinforced my understanding of CSS structure, including the four methods of including CSS (Inline, Internal, External, and JavaScript). I consolidated the difference between the ID and Class attributes for targeted vs. reusable styling. I also detailed key responsive design principles, such as utilizing relative units (percentages) and min/max constraints to ensure fluid layout across various viewports. Finally, I documented the essential three-step Git workflow (add, commit, push) for version control.",
+        myRole: "Solo project, responsible for content organization, structuring the HTML for content modularity (using sections and lists), and curating the comprehensive technical notes for foundational web technologies.",
+        challengesSolved: "Successfully organized complex, multi-topic notes into a single, highly readable format using semantic HTML5 elements (sections, ordered/unordered lists, code tables). The design clearly distinguishes between unique element identification (ID) and reusable styling groups (Class). The detailed documentation on Git provides clear analogies and a simplified workflow for version control beginners."
       }
     },
     {
@@ -221,34 +234,11 @@ const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCas
             My Projects
           </h1>
           <p className={`text-lg mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            {showProjects ? `${filteredProjects.length} ${filteredProjects.length === 1 ? 'project' : 'projects'} showcased` : 'Click below to preview my work'}
+            {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'} showcased
           </p>
-          
-          {/* ⭐ PREVIEW TOGGLE BUTTON (CHALLENGE SOLUTION) */}
-          <button
-            onClick={() => setShowProjects(!showProjects)}
-            className={`px-8 py-4 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-xl flex items-center gap-3 mx-auto ${
-              showProjects
-                ? 'bg-linear-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600'
-                : 'bg-linear-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600'
-            } text-white`}
-          >
-            {showProjects ? (
-              <>
-                <EyeOff size={24} />
-                Hide Projects
-              </>
-            ) : (
-              <>
-                <Eye size={24} />
-                Show Projects
-              </>
-            )}
-          </button>
         </div>
 
-        {/* ⭐ CONDITIONAL RENDERING - Only show if showProjects is true */}
-        {showProjects ? (
+        {/* Projects (always visible) */}
           <>
             {/* Search and Filter Section */}
             <div className={`${isDark ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} rounded-xl p-6 shadow-lg border mb-8`}>
@@ -359,6 +349,7 @@ const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCas
                     name={project.name}
                     screenshot={project.screenshot}
                     githubRepo={project.githubRepo}
+                    liveDemo={project.liveDemo}
                     techUsed={project.techUsed}
                     writeUp={project.writeUp}
                     isDark={isDark}
@@ -380,18 +371,6 @@ const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCas
               </div>
             )}
           </>
-        ) : (
-          // ⭐ BLANK STATE - Shown when showProjects is false
-          <div className={`text-center py-32 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            <Eye size={80} className="mx-auto mb-6 opacity-30" />
-            <h2 className={`text-3xl font-bold mb-4 ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
-              Ready to see my work?
-            </h2>
-            <p className="text-lg mb-8">
-              Click the button above to explore my portfolio projects
-            </p>
-          </div>
-        )}
       </div>
       {/* ⭐ NEW: Render Popup */}
       {isPopupOpen && (

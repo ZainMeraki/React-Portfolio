@@ -52,14 +52,7 @@ const ProjectPopup = ({ project, isDark, onClose }) => {
             />
             <div className="absolute inset-0 bg-linear-to-t from-gray-900 via-gray-900/50 to-transparent"></div>
             
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 p-2 bg-gray-900/80 hover:bg-gray-800 text-white rounded-full transition-all duration-200 hover:scale-110 backdrop-blur-sm"
-              aria-label="Close popup"
-            >
-              <X size={24} />
-            </button>
+            
 
             {/* Project Title Overlay */}
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
@@ -129,18 +122,16 @@ const ProjectPopup = ({ project, isDark, onClose }) => {
                 View on GitHub
                 <ExternalLink size={16} />
               </a>
-              
-              {/* Optional Live Demo Link - commented out as in original
+
               <a
-                href={project.liveDemo}
+                href={project.liveDemo || project.githubRepo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105"
+                className="flex items-center gap-2 px-6 py-3 bg-linear-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105"
               >
                 <ExternalLink size={20} />
-                Live Demo
-              </a> 
-              */}
+                Live Site
+              </a>
             </div>
 
             {/* Project Details Grid */}

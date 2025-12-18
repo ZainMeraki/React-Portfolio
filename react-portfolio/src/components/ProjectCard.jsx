@@ -1,7 +1,7 @@
 import React from 'react';
 import { Github, ExternalLink, Eye } from 'lucide-react';
 
-const ProjectCard = ({ name, screenshot, githubRepo, techUsed, writeUp, isDark, onViewDetails }) => {
+const ProjectCard = ({ name, screenshot, githubRepo, liveDemo, techUsed, writeUp, isDark, onViewDetails }) => {
   // Format text with code highlighting
   const formatText = (text) => {
     if (!text) return '';
@@ -99,6 +99,21 @@ const ProjectCard = ({ name, screenshot, githubRepo, techUsed, writeUp, isDark, 
             title="View on GitHub"
           >
             <Github size={20} />
+          </a>
+          <a
+            href={liveDemo || githubRepo}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className={`px-4 py-3 ${
+              isDark
+                ? 'bg-gray-700 hover:bg-gray-600'
+                : 'bg-gray-200 hover:bg-gray-300'
+            } ${isDark ? 'text-white' : 'text-gray-900'} font-medium rounded-lg transition-all duration-200 shadow-md hover:shadow-lg flex items-center justify-center gap-2`}
+            title="Open Live Site"
+          >
+            <ExternalLink size={18} />
+            <span className="sr-only">Open Live Site</span>
           </a>
         </div>
       </div>

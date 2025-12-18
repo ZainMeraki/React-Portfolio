@@ -10,7 +10,7 @@ import bhromaon from '../assets/BHROMAON.png';
 import mgContact from '../assets/MG-Contact.png';
 import japan from '../assets/Japan.png';
 import genesis from '../assets/Genesis.png';
-import atmSytem from '../assets/ATM-System.png';
+import atmSystem from '../assets/ATM-System.png';
 import bookTracker from '../assets/Book-Tracker.png';
 import numberGame from '../assets/Number-Game.png';
 import gameZone from '../assets/Bootstrap.png';
@@ -22,18 +22,16 @@ const Portfolio = ({ isDark }) => {
   const [selectedTechs, setSelectedTechs] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
   
-  // ⭐ NEW: Popup state management
+  // Popup state management
   const [selectedProject, setSelectedProject] = useState(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  // ⭐ STATE FOR PREVIEW CHALLENGE
   
-
   const projects = [
     {
       name: "Num2Word",
       screenshot: num2Word,
       githubRepo: "https://github.com/ZainMeraki/Num2Word",
+      liveDemo: "https://zainmeraki.github.io/Num2Word/",
       techUsed: ["HTML", "CSS", "Javascript"],
       writeUp: {
         whatItDoes: "A dynamic web utility that instantly converts numerical input into its corresponding word representation (e.g., 1,234,567 becomes 'One Million Two Hundred and Thirty-Four Thousand Five Hundred and Sixty-Seven'). It features a engaging typewriter animation for displaying the output and a unique CSS Live Edit box, allowing users to modify the application's styles in real-time.",
@@ -46,7 +44,8 @@ const Portfolio = ({ isDark }) => {
       name: "City Guesser",
       screenshot: cityGuesser,
       githubRepo: "https://github.com/ZainMeraki/React-API",
-      techUsed: ["HTML", "CSS", "Javascript", "React JS", "GeoDB API"],
+      liveDemo: "https://guesscity.netlify.app/",
+      techUsed: ["React JS", "GeoDB API"],
       writeUp: {
         whatItDoes: "An interactive geography-based quiz game built with ReactJS where players identify major global cities based on population statistics. The application features a robust authentication system (Login/Registration) that persists user data via LocalStorage. Gameplay includes a dynamic scoring engine that awards 10 points for standard guesses or 5 points when using the 'Hint' feature, alongside real-time streak tracking and automated feedback transitions. It integrates with the GeoDB Cities API to fetch live data for cities with populations exceeding 500,000.",
         whatILearned: "I advanced my proficiency in React Hooks, specifically using 'useEffect' for asynchronous API orchestration and 'useState' for managing complex game states. I learned how to implement client-side authentication logic and session persistence without a dedicated backend by leveraging browser storage. Additionally, I practiced complex form validation techniques, including the use of Regular Expressions (Regex) to enforce multi-factor password requirements (uppercase, numbers, and special characters) during the registration process.",
@@ -58,6 +57,7 @@ const Portfolio = ({ isDark }) => {
       name: "BHROMAON",
       screenshot: bhromaon,
       githubRepo: "https://github.com/ZainMeraki/BHROHAOM-Figma",
+      liveDemo: "https://bhromaon-figma.netlify.app/",
       techUsed: ["HTML", "CSS", "SCSS"],
       writeUp: {
         whatItDoes: "A fully responsive, multi-section landing page for a travel agency, BHROMAON. It accurately recreates a complex Figma design, featuring a full-screen hero section with a search form, a main navigation bar fixed below the hero, detailed content sections (Why Choose Us, Process, Destinations), and a Testimonial section. The site strictly adheres to semantic HTML5 structure and uses Sass for a modular, maintainable, and responsive CSS architecture.",
@@ -70,6 +70,7 @@ const Portfolio = ({ isDark }) => {
       name: "Code Diary",
       screenshot: codeDiary,
       githubRepo: "https://github.com/ZainMeraki/Code-Diary",
+      liveDemo: "https://meraki-code-diary.netlify.app/",
       techUsed: ["HTML", "CSS", "Javascript"],
       writeUp: {
         whatItDoes: "A static, single-page application (SPA) acting as a technical reference guide for core web development concepts (HTML, CSS, JavaScript, and Git). It uses a fixed sidebar for navigation and dynamically switches between content sections (CSS, JS, Git) without full page reloads. The application also includes a Dark/Light Mode toggle for improved accessibility and user preference retention.",
@@ -82,6 +83,7 @@ const Portfolio = ({ isDark }) => {
       name: "MG+ - Contact Page & Nav",
       screenshot: mgContact,
       githubRepo: "https://github.com/MPLarsson/Group-Project",
+      liveDemo: "https://mg-dj.netlify.app/contact",
       techUsed: ["HTML", "CSS"],
       writeUp: {
         whatItDoes: "A collaborative frontend design project for a multi-page website (MG+), themed around a DJ/event booking platform for scheduling and promotion. My focus was delivering two key components: the responsive Global Navigation Bar for site-wide consistency, and the dedicated Contact Us Page, featuring a modern, full-screen CSS-only modal contact form to handle inquiries.",
@@ -94,6 +96,7 @@ const Portfolio = ({ isDark }) => {
       name: "Japan Responsive Navigation",
       screenshot: japan,
       githubRepo: "https://github.com/ZainMeraki/Japan-Responsive-Figma",
+      liveDemo: "https://japan-figma.netlify.app/",
       techUsed: ["HTML", "CSS", "SCSS"],
       writeUp: {
         whatItDoes: "A solo, front-end development project focused on pixel-perfectly translating a Figma design into a functional, single-page promotional website (themed 'Japan'). The primary goals were achieving high visual fidelity, ensuring full responsiveness across all devices, and optimizing for search engines (SEO).",
@@ -106,6 +109,7 @@ const Portfolio = ({ isDark }) => {
       name: "Genesis",
       screenshot: genesis,
       githubRepo: "https://github.com/ZainMeraki/Genesis-SASS-Figma",
+      liveDemo: "https://genesis-scss.netlify.app/",
       techUsed: ["HTML", "CSS", "SCSS"],
       writeUp: {
         whatItDoes: "A sophisticated, multi-page professional portfolio or agency website, 'Genesis' is built on a clean, typography-focused design system. It features sections for a multi-column image gallery, a detailed project showcase with dynamic layout transitions, a comprehensive list of services, and an organized awards timeline. The architecture is focused on modular SCSS for maintainability.",
@@ -118,6 +122,7 @@ const Portfolio = ({ isDark }) => {
       name: "GameZone",
       screenshot: gameZone,
       githubRepo: "https://github.com/ZainMeraki/BOOTSTRAP-Site",
+      liveDemo: "https://bootstrap-game-zone.netlify.app/",
       techUsed: ["HTML", "Bootstrap"],
       writeUp: {
         whatItDoes: "A responsive, single-page website for an online video game store called 'GameZone.' It features a distinct, dark-themed aesthetic with a red, yellow, and black color palette, showcasing core e-commerce elements like a sticky navigation bar with a mobile toggle, a searchable game catalog, a shopping cart, a user account dropdown, and a prominent special offer section. The entire structure and styling are achieved solely using HTML and Bootstrap 5 utility classes.",
@@ -130,6 +135,7 @@ const Portfolio = ({ isDark }) => {
       name: "SVG Animations",
       screenshot: svgAnimation,
       githubRepo: "https://github.com/ZainMeraki/SVGAnimBasics",
+      liveDemo: "https://svg-anim.netlify.app/",
       techUsed: ["HTML", "CSS"],
       writeUp: {
         whatItDoes: "A single-page web portfolio showcasing 12 common interface icons that were completely recreated using only inline SVG code and the primitive shapes and path commands (e.g., `&lt;path&gt;`, `&lt;rect&gt;`, `&lt;circle&gt;`, `&lt;line&gt;`). The page itself features a vivid, animated CSS background gradient, and each recreated SVG icon is enhanced with CSS animations and transitions upon hovering, demonstrating proficiency in vector graphics creation and modern front-end animation techniques.",
@@ -140,8 +146,9 @@ const Portfolio = ({ isDark }) => {
     },
     {
       name: "ATM System",
-      screenshot: atmSytem,
+      screenshot: atmSystem,
       githubRepo: "https://github.com/ZainMeraki/JS5-Bank-Account",
+      liveDemo: "https://atm-system-js.netlify.app/",
       techUsed: ["HTML", "CSS", "Javascript"],
       writeUp: {
         whatItDoes: "A fully functional, web-based Automated Teller Machine (ATM) simulation designed to manage a single bank account. The system utilizes a JavaScript object (`account`) to store state (balance, account name, login status) and encapsulate all business logic (deposit, withdrawal, balance check, error handling). The application features a secure login/logout flow using JavaScript prompts and dynamic content updates, providing real-time feedback and transaction results via a dedicated message box.",
@@ -154,6 +161,7 @@ const Portfolio = ({ isDark }) => {
       name: "Book Tracker",
       screenshot: bookTracker,
       githubRepo: "https://github.com/ZainMeraki/JS6-Book-Tracker",
+      liveDemo: "https://book-tracker-js.netlify.app/",
       techUsed: ["HTML", "CSS", "Javascript"],
       writeUp: {
         whatItDoes: "A dynamic Book Tracker application designed to manage a personal library of books. It stores books as JavaScript objects within a global array (`library`), allowing users to add new books via an interactive modal, view all books, filter for unread books, mark books as read, and remove books. The application features a responsive HTML/CSS user interface that dynamically updates the book list and key statistics (total books, read, unread) in real-time using DOM manipulation.",
@@ -166,6 +174,7 @@ const Portfolio = ({ isDark }) => {
       name: "Number Games",
       screenshot: numberGame,
       githubRepo: "https://github.com/ZainMeraki/JS4-Number-Games",
+      liveDemo: "https://number-games-js.netlify.app/",
       techUsed: ["HTML", "CSS", "Javascript"],
       writeUp: {
         whatItDoes: "A collection of three distinct JavaScript exercises combined into a single interactive web page, designed to showcase fundamental programming logic. The exercises cover: 1) Guess the Number (a simple game utilizing random number generation and conditional logic), 2) Random Array Generator (creating arrays of arbitrary length populated by random numbers using loops), and 3) Sum of Even Numbers (analyzing the generated array using loops and the modulo operator to calculate a subset sum).",
@@ -213,13 +222,13 @@ const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCas
     setSearchQuery('');
   };
 
-  // ⭐ NEW: Function to open popup
+  // Function to open popup
   const handleViewDetails = (project) => {
     setSelectedProject(project);
     setIsPopupOpen(true);
   };
 
-  // ⭐ NEW: Function to close popup
+  // Function to close popup
   const handleClosePopup = () => {
     setIsPopupOpen(false);
     setTimeout(() => setSelectedProject(null), 300); // Clear after animation
@@ -372,7 +381,7 @@ const matchesSearch = project.name.toLowerCase().includes(searchQuery.toLowerCas
             )}
           </>
       </div>
-      {/* ⭐ NEW: Render Popup */}
+      {/* Render Popup */}
       {isPopupOpen && (
         <ProjectPopup 
           project={selectedProject}

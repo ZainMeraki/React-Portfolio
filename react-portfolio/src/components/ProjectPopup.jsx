@@ -211,7 +211,7 @@ const ProjectPopup = ({ project, isDark, onClose }) => {
                   {project.techUsed.map((tech, index) => (
                     <div
                       key={index}
-                      className={`px-5 py-3 ${isDark ? 'bg-gray-700' : 'bg-white'} border ${isDark ? 'border-gray-600' : 'border-gray-300'} rounded-lg font-semibold text-lg hover:scale-105 transition-transform cursor-default shadow-sm`}
+                      className={`px-5 py-3 ${isDark ? 'bg-gray-700 text-white' : 'bg-white text-gray-900'} border ${isDark ? 'border-gray-600' : 'border-gray-300'} rounded-lg font-semibold text-lg hover:scale-105 transition-transform cursor-default shadow-sm`}
                     >
                       {tech}
                     </div>
